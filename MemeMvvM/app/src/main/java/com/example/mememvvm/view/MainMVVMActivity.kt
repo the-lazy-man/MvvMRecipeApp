@@ -33,7 +33,7 @@ class MainMVVMActivity  : AppCompatActivity() {
         val pb = findViewById(R.id.progressBar) as ProgressBar
 
         pb.visibility = View.VISIBLE
-//        viewModel.loadImages()
+        viewModel.loadImages()
         // Observe the images LiveData
         viewModel.images.observe(this) { images ->
             adapter = ImageAdapter(images)
@@ -46,9 +46,5 @@ class MainMVVMActivity  : AppCompatActivity() {
 
     }
 
-    override fun onPause() {
-        super.onPause()
 
-        viewModel.loadImages()
-    }
 }
