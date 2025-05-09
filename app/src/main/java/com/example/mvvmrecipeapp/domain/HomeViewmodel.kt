@@ -23,7 +23,7 @@ class HomeViewmodel : ViewModel() {
     val popularItemsLiveData: LiveData<List<PopularMeal>> get() = _popularItemsLiveData
     private var _categoriesLiveData = MutableLiveData<List<Category>>()
     val categoriesLiveData: LiveData<List<Category>> get() = _categoriesLiveData
-
+//
     fun getRandomMeal() {
         RetrofitInstance.api.getRandomMeal().enqueue(
             object : Callback<MealList> {
