@@ -1,16 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
     namespace = "com.example.mvvmrecipeapp"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.mvvmrecipeapp"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -26,22 +27,27 @@ android {
             )
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
-    buildFeatures{
-        viewBinding {
-            enable = true
-        }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
 dependencies {
-
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -52,22 +58,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
     implementation(libs.gif.animation)
     implementation(libs.retrofit.android)
     implementation(libs.gson.android)
-    implementation(libs.glide.compiler)
     implementation(libs.glide.android)
-
-    implementation(libs.lifecycle.livedata)
-    implementation(libs.lifecycle.livedata.ktx)
-    implementation(libs.lifecycle.viewmodel)
-    implementation(libs.lifecycle.viewmodel.ktx)
+    kapt(libs.glide.compiler)
     implementation(libs.coordinatorlayout)
 }
-//implementation 'com.github.bumptech.glide:glide:4.12.0'
-//annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-//#implementation("com.squareup.retrofit2:retrofit:2.9.0")
-//#implementation 'com.squareup.retrofit2:converter-gson:2.9.0'

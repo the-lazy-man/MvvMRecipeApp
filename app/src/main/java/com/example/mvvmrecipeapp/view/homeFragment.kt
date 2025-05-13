@@ -53,7 +53,8 @@ class homeFragment : Fragment() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel = ViewModelProvider(this).get(HomeViewmodel::class.java)
+//        homeViewModel = ViewModelProvider(this).get(HomeViewmodel::class.java)
+        homeViewModel = (activity as MainActivity).viewModel
         popularMealsAdapter = MostPopularMealAdapter()
         categoryListAdapter = CategoryListAdapter()
     }
@@ -73,6 +74,7 @@ class homeFragment : Fragment() {
         binding.randomMeal.setOnClickListener {
             onRandomMealClick()
         }
+
         homeViewModel.getPopularItems()
         setUpPopularMealsRecylerView()
         observePopularItemsLiveData()
@@ -81,21 +83,20 @@ class homeFragment : Fragment() {
         setUpCategoryListRecylerView()
         homeViewModel.getCategoryList()
         observeCategoryListLiveData()
-//        onCategoryListItemClick()
+        onCategoryListItemClick()
+
     }
 
-//    private fun onCategoryListItemClick() {
-//        categoryListAdapter.onCategoryItemClick = { categoryItem ->
-//            val intent = Intent(activity, MealDetailsActivity::class.java)
-//            intent.apply {
-//                putExtra(MEAL_NAME, categoryItem.strCategory)
-//                putExtra(MEAL_ID, categoryItem.idCategory)
-//                putExtra(MEAL_THUMB, categoryItem.strCategoryThumb)
-//            }
-//            startActivity(intent)
-//
-//        }
-//    }
+    private fun onCategoryListItemClick() {
+        categoryListAdapter.onCategoryItemClick = { categoryItem ->
+            val intent = Intent(activity, CategoryMealsActivity::class.java)
+            intent.apply {
+               putExtra(CATEGORY_NAME,categoryItem.strCategory)
+            }
+            startActivity(intent)
+
+        }
+    }
 
     private fun observeCategoryListLiveData() {
         homeViewModel.categoriesLiveData.observe(viewLifecycleOwner, Observer {

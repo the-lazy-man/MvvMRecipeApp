@@ -2,13 +2,22 @@ package com.example.mvvmrecipeapp.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.example.mvvmrecipeapp.Model.Db.MealsDatabase
 import com.example.mvvmrecipeapp.R
+import com.example.mvvmrecipeapp.domain.HomeViewModelFactory
+import com.example.mvvmrecipeapp.domain.HomeViewmodel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    //
+    val viewModel : HomeViewmodel by lazy {
+        val mealDatabase = MealsDatabase.getInstance(this)
+        val viewModelFactory = HomeViewModelFactory(mealDatabase)
+        ViewModelProvider(this,viewModelFactory)[HomeViewmodel::class.java]
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

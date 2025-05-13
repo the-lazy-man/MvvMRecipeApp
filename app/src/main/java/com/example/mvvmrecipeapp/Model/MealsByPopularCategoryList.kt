@@ -1,5 +1,5 @@
 package com.example.mvvmrecipeapp.Model
 
-data class MealsByCategoryList(
+data class MealsByPopularCategoryList(
     val meals: List<PopularMeal>
 )

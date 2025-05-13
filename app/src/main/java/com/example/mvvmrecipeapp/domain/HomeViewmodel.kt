@@ -6,7 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mvvmrecipeapp.Model.Category
 import com.example.mvvmrecipeapp.Model.CategoryList
-import com.example.mvvmrecipeapp.Model.MealsByCategoryList
+import com.example.mvvmrecipeapp.Model.Db.MealsDatabase
+import com.example.mvvmrecipeapp.Model.MealsByPopularCategoryList
 import com.example.mvvmrecipeapp.Model.PopularMeal
 
 import com.example.mvvmrecipeapp.Model.Meal
@@ -16,13 +17,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewmodel : ViewModel() {
+class HomeViewmodel(private val mealDatabase : MealsDatabase) : ViewModel() {
     private var _randomMealLiveData = MutableLiveData<Meal>()
     val randomMealLiveData: LiveData<Meal> get() = _randomMealLiveData
     private var _popularItemsLiveData = MutableLiveData<List<PopularMeal>>()
     val popularItemsLiveData: LiveData<List<PopularMeal>> get() = _popularItemsLiveData
     private var _categoriesLiveData = MutableLiveData<List<Category>>()
     val categoriesLiveData: LiveData<List<Category>> get() = _categoriesLiveData
+
+    val favouriteMealsLiveData  : LiveData<List<Meal>> = mealDatabase.mealDao().getAllMeals()
+//    var favouriteMealsLiveData : LiveData<List<Meal>> = _favouriteMealsLiveData
 //
     fun getRandomMeal() {
         RetrofitInstance.api.getRandomMeal().enqueue(
@@ -42,14 +46,14 @@ class HomeViewmodel : ViewModel() {
             })
     }
     fun getPopularItems(){
-        RetrofitInstance.api.getlistPopularItems("pasta").enqueue(object : Callback<MealsByCategoryList>{
-            override fun onResponse(call: Call<MealsByCategoryList>, response: Response<MealsByCategoryList>) {
+        RetrofitInstance.api.getlistPopularItems("pasta").enqueue(object : Callback<MealsByPopularCategoryList>{
+            override fun onResponse(call: Call<MealsByPopularCategoryList>, response: Response<MealsByPopularCategoryList>) {
                 if(response.body() != null){
                     _popularItemsLiveData.value = response.body()!!.meals
                 }
             }
 
-            override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
+            override fun onFailure(call: Call<MealsByPopularCategoryList>, t: Throwable) {
                 Log.d("PopularItems Error -> ",t.message.toString())
             }
         } )

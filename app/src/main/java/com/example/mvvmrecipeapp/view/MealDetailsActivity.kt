@@ -5,12 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
-import com.example.mvvmrecipeapp.R
 import com.example.mvvmrecipeapp.databinding.ActivityMealDetailsBinding
 import com.example.mvvmrecipeapp.domain.MealDetailViewModel
 import com.example.mvvmrecipeapp.view.homeFragment.Companion.MEAL_ID
@@ -18,6 +17,9 @@ import com.example.mvvmrecipeapp.view.homeFragment.Companion.MEAL_NAME
 import com.example.mvvmrecipeapp.view.homeFragment.Companion.MEAL_STR
 import com.example.mvvmrecipeapp.view.homeFragment.Companion.MEAL_THUMB
 import androidx.lifecycle.ViewModelProvider
+import com.example.mvvmrecipeapp.Model.Db.MealsDatabase
+import com.example.mvvmrecipeapp.Model.Meal
+import com.example.mvvmrecipeapp.domain.MealsViewModelFactory
 
 class MealDetailsActivity : AppCompatActivity() {
     private lateinit var mealId : String
@@ -30,8 +32,10 @@ class MealDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMealDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        mealDetailsViewModel = ViewModelProvider(this)[MealDetailViewModel::class.java]
+        val mealDatabase = MealsDatabase.getInstance(this)
+        val viewModelFactory = MealsViewModelFactory(mealDatabase)
+        mealDetailsViewModel = ViewModelProvider(this, viewModelFactory)[MealDetailViewModel::class.java]
+//        mealDetailsViewModel = ViewModelProvider(this)[MealDetailViewModel::class.java]
 
         // for youtube icon to not be overlapped by device's bottom navigation buttons
         ViewCompat.setOnApplyWindowInsetsListener(binding.youtubeBar) { view, insets ->
@@ -43,6 +47,14 @@ class MealDetailsActivity : AppCompatActivity() {
         setUpViewWithMealInfo()
         observeMealDetails()
         OnYouTubeImageClick()
+        onFavoriteClick()
+    }
+
+    private fun onFavoriteClick() {
+        binding.btnSaveToFav.setOnClickListener{
+            mealToSave?.let { mealDetailsViewModel.insertMeal(it) }
+            Toast.makeText(this,"Meal Saved to Favourites".toString(),Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun OnYouTubeImageClick() {
@@ -52,16 +64,17 @@ class MealDetailsActivity : AppCompatActivity() {
 
         }
     }
-
+    private var mealToSave : Meal? = null
     private fun observeMealDetails() {
         mealDetailsViewModel.getMealDetails(mealId)
         mealDetailsViewModel.mealDetailsLiveData.observe(this) { meal ->
             OnResponseCase()
+            mealToSave = meal
             binding.apply {
                 tvCategoryInfo.text = "Category : ${meal.strCategory}"
                 tvAreaInfo.text = "Area : ${meal.strArea}"
                 tvContent.text = meal.strInstructions
-                mealYoutubeLink = meal.strYoutube
+                mealYoutubeLink = meal.strYoutube.toString()
             }
         }
     }
