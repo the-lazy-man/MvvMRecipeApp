@@ -8,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.mvvmrecipeapp.Model.Meal
 import com.example.mvvmrecipeapp.R
+import com.example.mvvmrecipeapp.adapters.FavouriteMealsAdapter
 import com.example.mvvmrecipeapp.databinding.FragmentFavouritesBinding
 import com.example.mvvmrecipeapp.domain.HomeViewmodel
-import com.example.mvvmrecipeapp.adapters.FavouriteMealsAdapter
 
 
 class favouritesFragment : Fragment() {
@@ -21,15 +22,17 @@ class favouritesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentFavouritesBinding.inflate(layoutInflater)
         favouriteViewModel = (activity as MainActivity).viewModel
+        favouriteMealsAdapter = FavouriteMealsAdapter()
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourites, container, false)
+        binding = FragmentFavouritesBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,17 +42,14 @@ class favouritesFragment : Fragment() {
     }
 
     private fun prepareRecyclerView() {
-        favouriteMealsAdapter = FavouriteMealsAdapter()
         binding.rvFavourites.apply {
             layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
             adapter = favouriteMealsAdapter
         }
     }
-
     private fun observeFavourites(){
         favouriteViewModel.favouriteMealsLiveData.observe(viewLifecycleOwner, Observer {meal ->
-            favouriteMealsAdapter.setMeals(meal)
-//            favouriteMealsAdapter.differ.submitList(meal.toList())
+            favouriteMealsAdapter.differ.submitList(meal as ArrayList<Meal>)
 //            Log.d("mealList", "${favouriteViewModel.favouriteMealsLiveData.value}")
         })
     }

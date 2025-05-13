@@ -24,25 +24,6 @@ class MostPopularMealAdapter() : RecyclerView.Adapter<MostPopularMealAdapter.Pop
                 false
             )
         )
-        /*
-         the above return statement is just converting the xml file popular_meals into kotlin views/ code which is the inflate part
-         and giving it to the PopularMealViewHolder class. The class holds references to the views inside of the xml file.
-         Because we don't need to use findViewbyId() method inside the class as we used viewbinding on the xml file.  otherwise,
-         the class would have been like this:
-
-            override fun onBindViewHolder(holder: PopularMealViewHolder, position: Int) {
-                val meal = mealsList[position]
-                // Example: Assuming there's an ImageView with id 'imgMeal' and a TextView with id 'tvMealName' in your layout
-                holder.imgMeal.setImageResource(meal.imageResId)
-                // Replace with your image loading logic
-                holder.tvMealName.text = meal.name
-            }
-
-            class PopularMealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-                val imgMeal: ImageView = itemView.findViewById(R.id.imgMeal)
-                val tvMealName: TextView = itemView.findViewById(R.id.tvMealName)
-            }
-         */
     }
 
     override fun getItemCount(): Int {
@@ -61,3 +42,22 @@ class MostPopularMealAdapter() : RecyclerView.Adapter<MostPopularMealAdapter.Pop
     class PopularMealViewHolder(val binding : PopularItemsBinding) : RecyclerView.ViewHolder(binding.root)
 
 }
+/*
+        the above return statement is just converting the xml file popular_meals into kotlin views/ code which is the inflate part
+        and giving it to the PopularMealViewHolder class. The class holds references to the views inside of the xml file.
+        Because we don't need to use findViewbyId() method inside the class as we used viewbinding on the xml file.  otherwise,
+        the class would have been like this:
+
+           override fun onBindViewHolder(holder: PopularMealViewHolder, position: Int) {
+               val meal = mealsList[position]
+               // Example: Assuming there's an ImageView with id 'imgMeal' and a TextView with id 'tvMealName' in your layout
+               holder.imgMeal.setImageResource(meal.imageResId)
+               // Replace with your image loading logic
+               holder.tvMealName.text = meal.name
+           }
+
+           class PopularMealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+               val imgMeal: ImageView = itemView.findViewById(R.id.imgMeal)
+               val tvMealName: TextView = itemView.findViewById(R.id.tvMealName)
+           }
+        */

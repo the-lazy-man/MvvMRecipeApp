@@ -28,6 +28,8 @@ class MealDetailsActivity : AppCompatActivity() {
     private lateinit var mealYoutubeLink: String
     private lateinit var binding : ActivityMealDetailsBinding
     private lateinit var mealDetailsViewModel : MealDetailViewModel
+    private var mealToSave : Meal? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealDetailsBinding.inflate(layoutInflater)
@@ -53,7 +55,7 @@ class MealDetailsActivity : AppCompatActivity() {
     private fun onFavoriteClick() {
         binding.btnSaveToFav.setOnClickListener{
             mealToSave?.let { mealDetailsViewModel.insertMeal(it) }
-            Toast.makeText(this,"Meal Saved to Favourites".toString(),Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Meal Saved to Favourites",Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -64,7 +66,6 @@ class MealDetailsActivity : AppCompatActivity() {
 
         }
     }
-    private var mealToSave : Meal? = null
     private fun observeMealDetails() {
         mealDetailsViewModel.getMealDetails(mealId)
         mealDetailsViewModel.mealDetailsLiveData.observe(this) { meal ->
