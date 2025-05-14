@@ -1,4 +1,4 @@
-package com.example.mvvmrecipeapp.view
+package com.example.mvvmrecipeapp.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.example.mvvmrecipeapp.R
-import com.example.mvvmrecipeapp.adapters.CategoryListAdapter
+import com.example.mvvmrecipeapp.view.adapters.CategoryListAdapter
 import com.example.mvvmrecipeapp.databinding.FragmentCategoriesBinding
-import com.example.mvvmrecipeapp.domain.HomeViewmodel
+import com.example.mvvmrecipeapp.domain.viewmodels.HomeViewmodel
+import com.example.mvvmrecipeapp.view.activities.CategoryMealsActivity
+import com.example.mvvmrecipeapp.view.activities.MainActivity
 
 
 class categoriesFragment : Fragment() {
@@ -46,7 +45,7 @@ class categoriesFragment : Fragment() {
 
     private fun onCategoryClick() {
         categoryListAdapter.onCategoryItemClick = {category ->
-            val intent = Intent(activity,CategoryMealsActivity::class.java)
+            val intent = Intent(activity, CategoryMealsActivity::class.java)
             intent.putExtra(homeFragment.CATEGORY_NAME,category.strCategory)
             startActivity(intent)
         }

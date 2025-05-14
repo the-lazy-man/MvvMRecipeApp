@@ -1,4 +1,4 @@
-package com.example.mvvmrecipeapp.Model
+package com.example.mvvmrecipeapp.Model.dataClasses
 
 data class Category(
     val idCategory: String,

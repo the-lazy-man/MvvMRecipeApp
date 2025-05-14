@@ -1,13 +1,12 @@
-package com.example.mvvmrecipeapp.adapters
+package com.example.mvvmrecipeapp.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.bumptech.glide.Glide
-import com.example.mvvmrecipeapp.Model.Meal
+import com.example.mvvmrecipeapp.Model.dataClasses.Meal
 import com.example.mvvmrecipeapp.databinding.MealItemBinding
 
 class FavouriteMealsAdapter : RecyclerView.Adapter<FavouriteMealsAdapter.FavouriteMealsAdapterViewHolder>() {

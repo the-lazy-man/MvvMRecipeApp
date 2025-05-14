@@ -1,19 +1,19 @@
-package com.example.mvvmrecipeapp.domain
+package com.example.mvvmrecipeapp.domain.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mvvmrecipeapp.Model.Category
-import com.example.mvvmrecipeapp.Model.CategoryList
+import com.example.mvvmrecipeapp.Model.dataClasses.Category
+import com.example.mvvmrecipeapp.Model.dataClasses.CategoryList
 import com.example.mvvmrecipeapp.Model.Db.MealsDatabase
-import com.example.mvvmrecipeapp.Model.MealsByPopularCategoryList
-import com.example.mvvmrecipeapp.Model.PopularMeal
+import com.example.mvvmrecipeapp.Model.dataClasses.MealsByPopularCategoryList
+import com.example.mvvmrecipeapp.Model.dataClasses.PopularMeal
 
-import com.example.mvvmrecipeapp.Model.Meal
-import com.example.mvvmrecipeapp.Model.MealList
-import com.example.mvvmrecipeapp.Model.RetrofitInstance
+import com.example.mvvmrecipeapp.Model.dataClasses.Meal
+import com.example.mvvmrecipeapp.Model.dataClasses.MealList
+import com.example.mvvmrecipeapp.Model.retrofit.RetrofitInstance
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback

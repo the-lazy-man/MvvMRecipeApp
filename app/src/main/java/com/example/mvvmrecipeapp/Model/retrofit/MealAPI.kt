@@ -1,4 +1,8 @@
-package com.example.mvvmrecipeapp.Model
+package com.example.mvvmrecipeapp.Model.retrofit
+import com.example.mvvmrecipeapp.Model.dataClasses.CategoryList
+import com.example.mvvmrecipeapp.Model.dataClasses.MealList
+import com.example.mvvmrecipeapp.Model.dataClasses.MealsByPopularCategoryList
+import com.example.mvvmrecipeapp.Model.dataClasses.MealsInACategoryList
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

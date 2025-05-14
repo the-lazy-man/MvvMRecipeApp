@@ -1,6 +1,5 @@
-package com.example.mvvmrecipeapp.view
+package com.example.mvvmrecipeapp.view.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,15 +10,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.mvvmrecipeapp.databinding.ActivityMealDetailsBinding
-import com.example.mvvmrecipeapp.domain.MealDetailViewModel
-import com.example.mvvmrecipeapp.view.homeFragment.Companion.MEAL_ID
-import com.example.mvvmrecipeapp.view.homeFragment.Companion.MEAL_NAME
-import com.example.mvvmrecipeapp.view.homeFragment.Companion.MEAL_STR
-import com.example.mvvmrecipeapp.view.homeFragment.Companion.MEAL_THUMB
+import com.example.mvvmrecipeapp.domain.viewmodels.MealDetailViewModel
+import com.example.mvvmrecipeapp.view.fragments.homeFragment.Companion.MEAL_ID
+import com.example.mvvmrecipeapp.view.fragments.homeFragment.Companion.MEAL_NAME
+import com.example.mvvmrecipeapp.view.fragments.homeFragment.Companion.MEAL_THUMB
 import androidx.lifecycle.ViewModelProvider
 import com.example.mvvmrecipeapp.Model.Db.MealsDatabase
-import com.example.mvvmrecipeapp.Model.Meal
-import com.example.mvvmrecipeapp.domain.MealsViewModelFactory
+import com.example.mvvmrecipeapp.Model.dataClasses.Meal
+import com.example.mvvmrecipeapp.domain.viewmodels.MealsViewModelFactory
 
 class MealDetailsActivity : AppCompatActivity() {
     private lateinit var mealId : String

@@ -1,10 +1,10 @@
-package com.example.mvvmrecipeapp.adapters
+package com.example.mvvmrecipeapp.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mvvmrecipeapp.Model.PopularMeal
+import com.example.mvvmrecipeapp.Model.dataClasses.PopularMeal
 import com.example.mvvmrecipeapp.databinding.PopularItemsBinding
 
 class MostPopularMealAdapter() : RecyclerView.Adapter<MostPopularMealAdapter.PopularMealViewHolder>() {

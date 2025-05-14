@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.mvvmrecipeapp.Model.Meal
+import com.example.mvvmrecipeapp.Model.dataClasses.Meal
 
 @Database(entities = [Meal::class], version = 1, exportSchema = false)
 @TypeConverters(MealTypeConvertor::class)

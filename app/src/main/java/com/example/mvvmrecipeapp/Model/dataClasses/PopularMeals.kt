@@ -1,6 +1,6 @@
-package com.example.mvvmrecipeapp.Model
+package com.example.mvvmrecipeapp.Model.dataClasses
 
-data class MealOfACategory(
+data class PopularMeal(
     val idMeal: String,
     val strMeal: String,
     val strMealThumb: String

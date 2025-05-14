@@ -1,4 +1,4 @@
-package com.example.mvvmrecipeapp.domain
+package com.example.mvvmrecipeapp.domain.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

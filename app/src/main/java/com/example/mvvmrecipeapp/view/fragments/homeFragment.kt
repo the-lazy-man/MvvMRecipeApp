@@ -1,38 +1,31 @@
-package com.example.mvvmrecipeapp.view
+package com.example.mvvmrecipeapp.view.fragments
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.Visibility
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
-import com.example.mvvmrecipeapp.Model.Meal
-import com.example.mvvmrecipeapp.Model.MealList
-import com.example.mvvmrecipeapp.Model.RetrofitInstance
-import com.example.mvvmrecipeapp.R
-import com.example.mvvmrecipeapp.databinding.ActivityMainBinding
+import com.example.mvvmrecipeapp.Model.dataClasses.Meal
 
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.load.DataSource
-import com.example.mvvmrecipeapp.Model.Category
-import com.example.mvvmrecipeapp.Model.PopularMeal
-import com.example.mvvmrecipeapp.adapters.CategoryListAdapter
-import com.example.mvvmrecipeapp.adapters.MostPopularMealAdapter
+import com.example.mvvmrecipeapp.Model.dataClasses.Category
+import com.example.mvvmrecipeapp.Model.dataClasses.PopularMeal
+import com.example.mvvmrecipeapp.view.adapters.CategoryListAdapter
+import com.example.mvvmrecipeapp.view.adapters.MostPopularMealAdapter
 import com.example.mvvmrecipeapp.databinding.FragmentHomeBinding
-import com.example.mvvmrecipeapp.domain.HomeViewmodel
+import com.example.mvvmrecipeapp.domain.viewmodels.HomeViewmodel
+import com.example.mvvmrecipeapp.view.activities.CategoryMealsActivity
+import com.example.mvvmrecipeapp.view.activities.MainActivity
+import com.example.mvvmrecipeapp.view.activities.MealDetailsActivity
 
 class homeFragment : Fragment() {
     private lateinit var popularMealsAdapter: MostPopularMealAdapter
@@ -113,7 +106,7 @@ class homeFragment : Fragment() {
 
     private fun onPopularItemClick() {
         popularMealsAdapter.onItemClick = {meal->
-            val intent = Intent(activity,MealDetailsActivity::class.java)
+            val intent = Intent(activity, MealDetailsActivity::class.java)
             intent.putExtra(MEAL_ID, meal.idMeal)
             intent.putExtra(MEAL_NAME, meal.strMeal)
             intent.putExtra(MEAL_THUMB, meal.strMealThumb)

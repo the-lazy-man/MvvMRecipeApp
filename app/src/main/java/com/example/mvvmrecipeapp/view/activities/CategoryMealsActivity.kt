@@ -1,14 +1,14 @@
-package com.example.mvvmrecipeapp.view
+package com.example.mvvmrecipeapp.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.mvvmrecipeapp.R
-import com.example.mvvmrecipeapp.adapters.CategoryMealsAdapter
+import com.example.mvvmrecipeapp.view.adapters.CategoryMealsAdapter
 import com.example.mvvmrecipeapp.databinding.ActivityCategoryMealsBinding
-import com.example.mvvmrecipeapp.domain.CategoryMealsViewModel
+import com.example.mvvmrecipeapp.domain.viewmodels.CategoryMealsViewModel
+import com.example.mvvmrecipeapp.view.fragments.homeFragment
 
 class CategoryMealsActivity : AppCompatActivity() {
     private lateinit var viewModel : CategoryMealsViewModel

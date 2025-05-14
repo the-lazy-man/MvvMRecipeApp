@@ -1,7 +1,6 @@
-package com.example.mvvmrecipeapp.view
+package com.example.mvvmrecipeapp.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mvvmrecipeapp.Model.Meal
-import com.example.mvvmrecipeapp.R
-import com.example.mvvmrecipeapp.adapters.FavouriteMealsAdapter
+import com.example.mvvmrecipeapp.Model.dataClasses.Meal
+import com.example.mvvmrecipeapp.view.adapters.FavouriteMealsAdapter
 import com.example.mvvmrecipeapp.databinding.FragmentFavouritesBinding
-import com.example.mvvmrecipeapp.domain.HomeViewmodel
+import com.example.mvvmrecipeapp.domain.viewmodels.HomeViewmodel
+import com.example.mvvmrecipeapp.view.activities.MainActivity
 import com.google.android.material.snackbar.Snackbar
 
 

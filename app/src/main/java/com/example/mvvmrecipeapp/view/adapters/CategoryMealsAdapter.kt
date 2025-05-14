@@ -1,12 +1,10 @@
-package com.example.mvvmrecipeapp.adapters
+package com.example.mvvmrecipeapp.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mvvmrecipeapp.Model.Category
-import com.example.mvvmrecipeapp.Model.MealOfACategory
-import com.example.mvvmrecipeapp.Model.MealsInACategoryList
+import com.example.mvvmrecipeapp.Model.dataClasses.MealOfACategory
 import com.example.mvvmrecipeapp.databinding.MealItemBinding
 
 class CategoryMealsAdapter : RecyclerView.Adapter<CategoryMealsAdapter.CategoryMealsViewHolder>(){

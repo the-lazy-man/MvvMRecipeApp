@@ -1,4 +1,4 @@
-package com.example.mvvmrecipeapp.Model
+package com.example.mvvmrecipeapp.Model.retrofit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,4 +1,4 @@
-package com.example.mvvmrecipeapp.view
+package com.example.mvvmrecipeapp.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,8 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.mvvmrecipeapp.Model.Db.MealsDatabase
 import com.example.mvvmrecipeapp.R
-import com.example.mvvmrecipeapp.domain.HomeViewModelFactory
-import com.example.mvvmrecipeapp.domain.HomeViewmodel
+import com.example.mvvmrecipeapp.domain.viewmodels.HomeViewModelFactory
+import com.example.mvvmrecipeapp.domain.viewmodels.HomeViewmodel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
