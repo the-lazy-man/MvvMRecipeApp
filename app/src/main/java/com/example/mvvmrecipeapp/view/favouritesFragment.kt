@@ -61,6 +61,7 @@ class favouritesFragment : Fragment() {
                 favouriteViewModel.deleteMeal(meal)
                 Snackbar.make(requireView(),"Meal deleted",Snackbar.LENGTH_LONG).setAction(
                     "Undo",
+                    // clicking on undo is adding the item at the end of the list. Need to Fix it.
                     View.OnClickListener {
                         favouriteViewModel.insertMeal(meal)
                     }
@@ -69,7 +70,7 @@ class favouritesFragment : Fragment() {
             }
         }
         ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.rvFavourites)
-    
+
     }
 
     private fun prepareRecyclerView() {
