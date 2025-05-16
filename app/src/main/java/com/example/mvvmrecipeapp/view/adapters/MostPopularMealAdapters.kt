@@ -9,6 +9,7 @@ import com.example.mvvmrecipeapp.databinding.PopularItemsBinding
 
 class MostPopularMealAdapter() : RecyclerView.Adapter<MostPopularMealAdapter.PopularMealViewHolder>() {
     lateinit var onItemClick : ( (PopularMeal) -> Unit)
+    var onLongItemClick : ((PopularMeal) -> Unit)? = null
     private var mealsList = ArrayList<PopularMeal>()
 
     fun setMeals(mealslist : ArrayList<PopularMeal>) {
@@ -34,8 +35,13 @@ class MostPopularMealAdapter() : RecyclerView.Adapter<MostPopularMealAdapter.Pop
         Glide.with(holder.itemView)
             .load(mealsList[position].strMealThumb)
             .into(holder.binding.imgPopularMeal)
+
             holder.itemView.setOnClickListener {
                 onItemClick(mealsList[position])
+            }
+            holder.itemView.setOnLongClickListener{
+                onLongItemClick?.invoke(mealsList[position])
+                true
             }
     }
 

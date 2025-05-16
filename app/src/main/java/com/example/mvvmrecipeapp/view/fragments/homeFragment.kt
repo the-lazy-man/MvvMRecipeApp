@@ -26,6 +26,7 @@ import com.example.mvvmrecipeapp.domain.viewmodels.HomeViewmodel
 import com.example.mvvmrecipeapp.view.activities.CategoryMealsActivity
 import com.example.mvvmrecipeapp.view.activities.MainActivity
 import com.example.mvvmrecipeapp.view.activities.MealDetailsActivity
+import com.example.mvvmrecipeapp.view.fragments.bottomSheet.BottomSheet
 
 class homeFragment : Fragment() {
     private lateinit var popularMealsAdapter: MostPopularMealAdapter
@@ -72,12 +73,20 @@ class homeFragment : Fragment() {
         setUpPopularMealsRecylerView()
         observePopularItemsLiveData()
         onPopularItemClick()
-
         setUpCategoryListRecylerView()
         homeViewModel.getCategoryList()
         observeCategoryListLiveData()
         onCategoryListItemClick()
 
+        onPopularItemLongClick()
+
+    }
+
+    private fun onPopularItemLongClick() {
+        popularMealsAdapter.onLongItemClick = {meal->
+            val bottomSheetFragment = BottomSheet.newInstance(meal.idMeal)
+            bottomSheetFragment.show(childFragmentManager, "Meal Info")
+        }
     }
 
     private fun onCategoryListItemClick() {
@@ -144,8 +153,8 @@ class homeFragment : Fragment() {
 //            }
 //        )
 //    }
-fun observeRandomMeal() {
-    homeViewModel.randomMealLiveData.observe(viewLifecycleOwner) { meal ->
+    fun observeRandomMeal() {
+        homeViewModel.randomMealLiveData.observe(viewLifecycleOwner) { meal ->
         binding.progressBar.visibility = View.VISIBLE
         binding.imgRandomMeal.visibility = View.INVISIBLE
 
@@ -169,7 +178,6 @@ fun observeRandomMeal() {
                 }
             })
             .into(binding.imgRandomMeal)
-
         this.randomMeal = meal
     }
 }
