@@ -60,13 +60,20 @@ class HomeViewmodel(private val mealDatabase : MealsDatabase) : ViewModel() {
             }
         })
     }
+
+    private var saveStateRandomMeal : Meal? = null
     fun getRandomMeal() {
+        saveStateRandomMeal?.let { randomMeal ->
+            _randomMealLiveData.value = randomMeal
+            return
+        }
         RetrofitInstance.api.getRandomMeal().enqueue(
             object : Callback<MealList> {
                 override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
                     if (response.isSuccessful) {
                         val randomMeal: Meal = response.body()!!.meals[0]
                         _randomMealLiveData.value = randomMeal
+                        saveStateRandomMeal = randomMeal
                         Log.d("Meal_Id -> ", "{${randomMeal.idMeal}}")
                         Log.d("Meal_Str -> ", "{${randomMeal.strMeal}}")
                     }
