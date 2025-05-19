@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -19,6 +20,7 @@ import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.load.DataSource
 import com.example.mvvmrecipeapp.Model.dataClasses.Category
 import com.example.mvvmrecipeapp.Model.dataClasses.PopularMeal
+import com.example.mvvmrecipeapp.R
 import com.example.mvvmrecipeapp.view.adapters.CategoryListAdapter
 import com.example.mvvmrecipeapp.view.adapters.MostPopularMealAdapter
 import com.example.mvvmrecipeapp.databinding.FragmentHomeBinding
@@ -80,6 +82,14 @@ class homeFragment : Fragment() {
 
         onPopularItemLongClick()
 
+        onSearchButtonClick()
+
+    }
+
+    private fun onSearchButtonClick() {
+        binding.imgSearch.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
     }
 
     private fun onPopularItemLongClick() {

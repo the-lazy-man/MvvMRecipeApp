@@ -30,8 +30,25 @@ class HomeViewmodel(private val mealDatabase : MealsDatabase) : ViewModel() {
     val bottomSheetMealsLiveData: LiveData<Meal> get() = _bottomSheetMealsLiveData
     private var _favouriteMealsLiveData = MutableLiveData<List<Meal>>()
     val favouriteMealsLiveData  : LiveData<List<Meal>> = mealDatabase.mealDao().getAllMeals()
-//    var favouriteMealsLiveData : LiveData<List<Meal>> = _favouriteMealsLiveData
+    private val _searchedMeal =  MutableLiveData<List<Meal>>()
+    val searchedMeal : LiveData<List<Meal>> = _searchedMeal
+
+    //    var favouriteMealsLiveData : LiveData<List<Meal>> = _favouriteMealsLiveData
 //
+    fun searchedMeal(searchQuery : String) = RetrofitInstance.api.searchMeal(searchQuery).enqueue(object : Callback<MealList>{
+        override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
+            val meals = response.body()?.meals
+            meals?.let{
+                _searchedMeal.postValue(it)
+            }
+        }
+
+        override fun onFailure(call: Call<MealList>, t: Throwable) {
+            Log.d("Error","${t.message}")
+        }
+
+    })
+
     fun getMealsById(Id: String){
         RetrofitInstance.api.getMealDetails(Id).enqueue(object  : Callback<MealList> {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {

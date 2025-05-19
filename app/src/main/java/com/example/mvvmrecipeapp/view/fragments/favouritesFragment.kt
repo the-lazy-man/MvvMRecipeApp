@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvmrecipeapp.Model.dataClasses.Meal
-import com.example.mvvmrecipeapp.view.adapters.FavouriteMealsAdapter
+import com.example.mvvmrecipeapp.view.adapters.MealsAdapter
 import com.example.mvvmrecipeapp.databinding.FragmentFavouritesBinding
 import com.example.mvvmrecipeapp.domain.viewmodels.HomeViewmodel
 import com.example.mvvmrecipeapp.view.activities.MainActivity
@@ -20,12 +20,12 @@ import com.google.android.material.snackbar.Snackbar
 class favouritesFragment : Fragment() {
     lateinit var favouriteViewModel : HomeViewmodel
     lateinit var binding : FragmentFavouritesBinding
-    private lateinit var favouriteMealsAdapter : FavouriteMealsAdapter
+    private lateinit var mealsAdapter : MealsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         favouriteViewModel = (activity as MainActivity).viewModel
-        favouriteMealsAdapter = FavouriteMealsAdapter()
+        mealsAdapter = MealsAdapter()
 
     }
     override fun onCreateView(
@@ -56,7 +56,7 @@ class favouritesFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                val meal = favouriteMealsAdapter.differ.currentList[position]
+                val meal = mealsAdapter.differ.currentList[position]
                 favouriteViewModel.deleteMeal(meal)
                 Snackbar.make(requireView(),"Meal deleted",Snackbar.LENGTH_LONG).setAction(
                     "Undo",
@@ -75,12 +75,12 @@ class favouritesFragment : Fragment() {
     private fun prepareRecyclerView() {
         binding.rvFavourites.apply {
             layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
-            adapter = favouriteMealsAdapter
+            adapter = mealsAdapter
         }
     }
     private fun observeFavourites(){
         favouriteViewModel.favouriteMealsLiveData.observe(viewLifecycleOwner, Observer {meal ->
-            favouriteMealsAdapter.differ.submitList(meal as ArrayList<Meal>)
+            mealsAdapter.differ.submitList(meal as ArrayList<Meal>)
 //            Log.d("mealList", "${favouriteViewModel.favouriteMealsLiveData.value}")
         })
     }

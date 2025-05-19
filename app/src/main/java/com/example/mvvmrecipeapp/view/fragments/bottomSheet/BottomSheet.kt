@@ -60,6 +60,7 @@ class BottomSheet : BottomSheetDialogFragment() {
                 intent.putExtra(MEAL_THUMB, mealThumb)
 
                 startActivity(intent)
+                    dismiss()
             }
         }
     }
