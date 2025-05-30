@@ -1,5 +1,5 @@
-# EasyFood
-EasyFood is an intuitive Android application designed to streamline your cooking experience. It helps you discover and prepare delicious meals with ease, offering a range of features to guide you from selection to serving.
+# MvvMRecipeApp
+It is an intuitive Android application designed to streamline your cooking experience. It helps you discover and prepare delicious meals with ease, offering a range of features to guide you from selection to serving.
 
 ## Features:
 - Diverse Meal Selection: Explore a wide variety of food options categorized for easy Browse.
