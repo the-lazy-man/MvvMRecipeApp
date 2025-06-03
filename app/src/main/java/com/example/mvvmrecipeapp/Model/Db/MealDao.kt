@@ -14,7 +14,10 @@ interface MealDao {
     suspend fun upsertMeal(meal: Meal)
     @Delete
     suspend fun deleteMeal(meal: Meal)
-    @Query("SELECT * FROM mealInformation")
+    @Query("SELECT * FROM mealInformation ORDER BY idMeal ASC")
     fun getAllMeals(): LiveData<List<Meal>>
+
+    @Query("SELECT MAX(sort) FROM mealInformation")
+    suspend fun getMaxSort(): Int?
 
 }

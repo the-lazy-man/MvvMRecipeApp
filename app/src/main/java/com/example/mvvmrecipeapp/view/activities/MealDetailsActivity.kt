@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataScope
 import com.bumptech.glide.Glide
 import com.example.mvvmrecipeapp.databinding.ActivityMealDetailsBinding
 import com.example.mvvmrecipeapp.domain.viewmodels.MealDetailViewModel
@@ -15,11 +17,13 @@ import com.example.mvvmrecipeapp.view.fragments.homeFragment.Companion.MEAL_ID
 import com.example.mvvmrecipeapp.view.fragments.homeFragment.Companion.MEAL_NAME
 import com.example.mvvmrecipeapp.view.fragments.homeFragment.Companion.MEAL_THUMB
 import androidx.lifecycle.ViewModelProvider
+import com.example.mvvmrecipeapp.Model.Db.MealDao
 import com.example.mvvmrecipeapp.Model.Db.MealsDatabase
 import com.example.mvvmrecipeapp.Model.dataClasses.Meal
 import com.example.mvvmrecipeapp.domain.viewmodels.MealsViewModelFactory
 
 class MealDetailsActivity : AppCompatActivity() {
+    private var isFromFav : Boolean = false
     private lateinit var mealId : String
     private lateinit var mealName : String
     private lateinit var mealThumb : String
@@ -51,9 +55,14 @@ class MealDetailsActivity : AppCompatActivity() {
     }
 
     private fun onFavoriteClick() {
-        binding.btnSaveToFav.setOnClickListener{
-            mealToSave?.let { mealDetailsViewModel.insertMeal(it) }
-            Toast.makeText(this,"Meal Saved to Favourites",Toast.LENGTH_SHORT).show()
+        binding.btnSaveToFav.setOnClickListener {
+            if (!isFromFav) {
+                mealToSave?.let {
+                    it.sort = mealDetailsViewModel.maxSort?.plus(1) ?: 0
+                    mealDetailsViewModel.insertMeal(it)
+                }
+                Toast.makeText(this, "Meal Saved to Favourites", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -83,6 +92,7 @@ class MealDetailsActivity : AppCompatActivity() {
         this.mealId = tempIntent.getStringExtra(MEAL_ID)!!
         this.mealName = tempIntent.getStringExtra(MEAL_NAME)!!
         this.mealThumb = tempIntent.getStringExtra(MEAL_THUMB)!!
+        this.isFromFav = tempIntent.getBooleanExtra("isFrom",false)
     }
 
     fun setUpViewWithMealInfo() {
