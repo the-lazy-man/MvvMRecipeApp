@@ -10,8 +10,15 @@ import com.example.mvvmrecipeapp.Model.dataClasses.Meal
 import com.example.mvvmrecipeapp.databinding.MealItemBinding
 
 class MealsAdapter : RecyclerView.Adapter<MealsAdapter.FavouriteMealsAdapterViewHolder>() {
+    private var listener: MealClickListener? = null
+
+    fun setMealClickListener(listener: MealClickListener) {
+        this.listener = listener
+    }
     inner class FavouriteMealsAdapterViewHolder(val binding: MealItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+
+        }
 
     private val diffUtil = object : DiffUtil.ItemCallback<Meal>() {
         override fun areItemsTheSame(oldItem: Meal, newItem: Meal): Boolean {
@@ -49,8 +56,14 @@ class MealsAdapter : RecyclerView.Adapter<MealsAdapter.FavouriteMealsAdapterView
                 .into(holder.binding.imgMeal)
             holder.binding.tvMealName.text = meal.strMeal
         }
+        holder.itemView.setOnClickListener {
+            listener?.onMealClicked(position, meal) // 💡 Send both position and item
+        }
     }
 
+}
+interface MealClickListener {
+    fun onMealClicked(position: Int, meal: Meal)
 }
 
 

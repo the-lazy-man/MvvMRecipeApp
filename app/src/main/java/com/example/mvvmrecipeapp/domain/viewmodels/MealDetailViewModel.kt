@@ -17,6 +17,7 @@ import retrofit2.Response
 class MealDetailViewModel(val mealDatabase : MealsDatabase) : ViewModel() {
     private val _mealDetailsLiveData = MutableLiveData<Meal>()
     val mealDetailsLiveData: LiveData<Meal> = _mealDetailsLiveData
+    var maxSort : Int? = null
 
 
     fun getMealDetails(mealId: String) {
@@ -27,6 +28,9 @@ class MealDetailViewModel(val mealDatabase : MealsDatabase) : ViewModel() {
                 override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
                     if(response.body() != null){
                         _mealDetailsLiveData.value = response.body()!!.meals[0]
+                        viewModelScope.launch {
+                            maxSort = mealDatabase.mealDao().getMaxSort() ?: 0
+                        }
                     }
                     else return
                 }
